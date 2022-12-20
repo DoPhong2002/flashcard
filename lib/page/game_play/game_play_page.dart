@@ -63,14 +63,14 @@ class _GamePlayPageState extends State<GamePlayPage> {
               left: -50,
               child: Image.asset('assets/photos/may.png'),
             ),
-            buildBackgroundImage()
+            buildGamePlay()
           ],
         ),
       ),
     );
   }
 
-  Widget buildBackgroundImage() {
+  Widget buildGamePlay() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -96,70 +96,69 @@ class _GamePlayPageState extends State<GamePlayPage> {
             const SizedBox(height: 24),
             Swipe(
               child: StreamBuilder<Offset>(
-                  stream: offsetStream.setOffsetStream,
-                  builder: (context, snapshot) {
-                    return SlideWidget(
+                stream: offsetStream.setOffsetStream,
+                builder: (context, snapshot) {
+                  return SlideWidget(
+                    key: UniqueKey(),
+                    offset: offsetStream.offset,
+                    child: FadeInWidget(
                       key: UniqueKey(),
-                      offset: offsetStream.offset,
-                      child: FadeInWidget(
-                        key: UniqueKey(),
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height * 0.6,
-                          color: const Color(0xFFFFBDB0),
-                          child: StreamBuilder<int>(
-                            stream: slideBloc.indexStream,
-                            builder: (context, snapshot) {
-                              final flashcard =
-                                  widget.listFlashcard[slideBloc.activeIndex];
-                              return Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Container(
-                                        color: Colors.white,
-                                        padding: const EdgeInsets.all(8),
-                                        child: Image.asset(
-                                          flashcard.image!,
-                                          fit: BoxFit.fill,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.45,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                        ),
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height * 0.6,
+                        color: const Color(0xFFFFBDB0),
+                        child: StreamBuilder<int>(
+                          stream: slideBloc.indexStream,
+                          builder: (context, snapshot) {
+                            final flashcard =
+                                widget.listFlashcard[slideBloc.activeIndex];
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(8),
+                                      child: Image.asset(
+                                        flashcard.image!,
+                                        fit: BoxFit.fill,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.45,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                       ),
-                                      StreamBuilder(
-                                        stream: selectedBloc.selectedStream,
-                                        builder: (context, snapshot) {
-                                          return buildHeart(flashcard);
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    '${flashcard.name}',
-                                    style: GoogleFonts.akayaTelivigala(
-                                      textStyle: Theme.of(context)
-                                          .textTheme
-                                          .headline2!
-                                          .copyWith(
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.black),
                                     ),
-                                  )
-                                ],
-                              );
-                            },
-                          ),
+                                    StreamBuilder(
+                                      stream: selectedBloc.selectedStream,
+                                      builder: (context, snapshot) {
+                                        return buildHeart(flashcard);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  '${flashcard.name}',
+                                  style: GoogleFonts.akayaTelivigala(
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .headline2!
+                                        .copyWith(
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.black),
+                                  ),
+                                )
+                              ],
+                            );
+                          },
                         ),
                       ),
-                    );
-                  }),
+                    ),
+                  );
+                },
+              ),
               onSwipeLeft: () {
                 next();
               },
@@ -228,6 +227,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
               size: 40,
             ),
             onTap: () {
+              music.btnSound();
               onRemove(flashcard);
             },
           )
@@ -239,6 +239,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
               size: 40,
             ),
             onTap: () {
+              music.btnSound();
               onAdd(flashcard);
             },
           );

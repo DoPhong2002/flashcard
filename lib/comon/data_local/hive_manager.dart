@@ -17,7 +17,7 @@ class HiveManager {
     await Hive.openBox(_currentBox);
   }
 
-  Future<dynamic> getValue(String key) async {
+  Future<dynamic> getValue(bool key) async {
     final box = Hive.box(_currentBox);
     final value = box.get(key);
     if (value != null) {
@@ -26,7 +26,7 @@ class HiveManager {
     return null;
   }
 
-  Future<void> setValue(String key, dynamic value) async {
+  Future<void> setValue(bool key, dynamic value) async {
     final box = Hive.box(_currentBox);
     if (value == null) {
       box.put(key, null);

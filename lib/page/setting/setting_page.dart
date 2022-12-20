@@ -1,3 +1,4 @@
+import 'package:flashcards/comon/data_local/hive_manager.dart';
 import 'package:flashcards/const/music.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
@@ -22,22 +23,38 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   void initState() {
-    if (music.player!.playing) {
-      notifier1.value = true;
-    } else {
-      notifier1.value = false;
-    }
+    // if (music.player!.playing) {
+    //   notifier1.value = true;
+    // } else {
+    //   notifier1.value = false;
+    // }
+    notifier1.value = music.isPlayMusic;
     notifier1.addListener(() {
       setState(() {
         if (notifier1.value) {
-          music.isPlay = true;
-          music.musicOnOff();
+          music.isPlayMusic = true;
+          hive.setValue(music.isPlayMusic, true);
+          music.backgroundMusic();
         } else {
-          music.isPlay = false;
-          music.musicOnOff();
+          music.isPlayMusic = false;
+          hive.setValue(music.isPlayMusic, false);
+          print('check: ${music.isPlayMusic}');
+          music.backgroundMusic();
         }
       });
     });
+    notifier2.addListener(() {
+      setState(() {
+        if (notifier2.value) {
+          music.isPlaySound = true;
+          music.btnSound();
+        } else {
+          music.isPlaySound = false;
+          music.btnSound();
+        }
+      });
+    });
+
     super.initState();
   }
 

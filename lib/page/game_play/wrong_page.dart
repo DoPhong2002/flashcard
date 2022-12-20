@@ -50,13 +50,14 @@ class WrongPage extends StatelessWidget {
                 ),
               ),
               IconButton(
-                  onPressed: () {
-                    navigatorPushAndRemoveUntil(
-                      context,
-                      const HomePage(),
-                    );
-                  },
-                  icon: const Icon(Icons.near_me)),
+                onPressed: () {
+                  navigatorPushAndRemoveUntil(
+                    context,
+                    const HomePage(),
+                  );
+                },
+                icon: const Icon(Icons.near_me),
+              ),
             ],
           ),
         ),

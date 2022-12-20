@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     if (!music.player!.playing) {
-      music.musicOnOff();
+      music.backgroundMusic();
     }
     startAnimation();
     super.initState();
@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 navigatorPushAndRemoveUntil(context, const SettingPage());
               },
-              image: 'assets/photos/ong.png',
+              image: 'assets/photos/setting.png',
               title: 'Setting'),
         ],
       ),

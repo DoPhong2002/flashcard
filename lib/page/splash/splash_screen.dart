@@ -1,3 +1,4 @@
+import 'package:flashcards/comon/data_local/hive_manager.dart';
 import 'package:flashcards/const/music.dart';
 import 'package:flashcards/model/flashcards_model.dart';
 import 'package:flashcards/page/home/home_page.dart';
@@ -22,9 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    music.musicOnOff();
-    model.createListFlashcard();
+    music.backgroundMusic();
     startAnimation();
+    model.createListFlashcard();
+    hive.getValue(music.isPlayMusic);
+    print(music.isPlayMusic);
+
     super.initState();
   }
 
@@ -150,7 +154,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   opacity: animate ? 1 : 0,
                   child: const CircleAvatar(
                     backgroundColor: Colors.deepPurple,
-                    child: Icon(Icons.navigate_next_outlined),
                   ),
                 ),
               ),
@@ -162,7 +165,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future startAnimation() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 1500));
     setState(() {
       animate = true;
     });
@@ -170,6 +173,8 @@ class _SplashScreenState extends State<SplashScreen> {
     setState(() {
       animate = false;
     });
+    await Future.delayed(const Duration(milliseconds: 1600));
+
     // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const HomePage()));
