@@ -1,7 +1,7 @@
 import 'package:flashcards/comon/navigator.dart';
 import 'package:flutter/material.dart';
 
-import '../../const/color.dart';
+import '../../const/const.dart';
 import '../../model/flashcards_model.dart';
 import '../game_play/game_play_page.dart';
 
@@ -40,7 +40,6 @@ class TypeCard extends StatelessWidget {
         width: double.infinity,
         height: 72,
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               margin: const EdgeInsets.only(right: 20),

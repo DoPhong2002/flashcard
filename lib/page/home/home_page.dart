@@ -1,6 +1,6 @@
 import 'package:flashcards/comon/navigator.dart';
-import 'package:flashcards/const/color.dart';
-import 'package:flashcards/const/music.dart';
+import 'package:flashcards/const/background.dart';
+import 'package:flashcards/page/design/design_page.dart';
 import 'package:flashcards/page/game_play/game_play_page.dart';
 import 'package:flashcards/page/home/card_type.dart';
 import 'package:flashcards/page/home/category_type.dart';
@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../bloc/flashcard_stream.dart';
+import '../../const/const.dart';
+import '../../const/music.dart';
 import '../../model/flashcards_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    if (!music.player!.playing) {
+    if (!music.player.playing) {
       music.backgroundMusic();
     }
     startAnimation();
@@ -73,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.black87),
               ),
               Image.asset(
-                'assets/photos/welcome.png',
+                '${baseImage}welcome.png',
                 width: 20,
               )
             ],
@@ -130,7 +132,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  'assets/photos/meo.png',
+                  '${baseImage}meo.png',
                   fit: BoxFit.cover,
                   width: 180,
                 )
@@ -168,7 +170,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  'assets/photos/logo_flashcards.png',
+                  '${baseImage}logo_flashcard.png',
                   fit: BoxFit.cover,
                   width: 200,
                 )
@@ -195,26 +197,24 @@ class _HomePageState extends State<HomePage> {
                     GamePlayPage(
                         listFlashcard: selectedBloc.listFlashcardSelected));
               },
-              image: 'assets/photos/nao.png',
+              image: '${baseImage}nao.png',
               title: 'Your Saved'),
+          CategoryType(
+              onTap: () {
+                navigatorPushAndRemoveUntil(context, const DesignPage());
+              },
+              image: '${baseImage}boy.png',
+              title: 'Your Design'),
           CategoryType(
               onTap: () {
                 navigatorPushAndRemoveUntil(context, const SettingPage());
               },
-              image: 'assets/photos/nao.png',
-              title: 'Your Saved'),
-          CategoryType(
-              onTap: () {
-                navigatorPushAndRemoveUntil(context, const SettingPage());
-              },
-              image: 'assets/photos/setting.png',
+              image: '${baseImage}setting.png',
               title: 'Setting'),
         ],
       ),
     );
   }
-
-
 
   Widget buildListPlay() {
     return Column(

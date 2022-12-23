@@ -12,6 +12,7 @@ import 'package:swipe/swipe.dart';
 import '../../bloc/flashcard_stream.dart';
 import '../../bloc/slide_stream.dart';
 import '../../bloc/offset_stream.dart';
+import '../../const/const.dart';
 import '../../model/flashcards_model.dart';
 
 class GamePlayPage extends StatefulWidget {
@@ -43,29 +44,27 @@ class _GamePlayPageState extends State<GamePlayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image.asset(
-              'assets/photos/hinhnengame.jpg',
-              fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-            ),
-            Positioned(
-              top: -50,
-              right: -50,
-              child: Image.asset('assets/photos/may.png'),
-            ),
-            Positioned(
-              top: 10,
-              left: -50,
-              child: Image.asset('assets/photos/may.png'),
-            ),
-            buildGamePlay()
-          ],
-        ),
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.asset(
+            '${baseImage}background.jpg',
+            fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+          ),
+          Positioned(
+            top: -50,
+            right: -50,
+            child: Image.asset('${baseImage}may.png'),
+          ),
+          Positioned(
+            top: 10,
+            left: -50,
+            child: Image.asset('${baseImage}may.png'),
+          ),
+          buildGamePlay()
+        ],
       ),
     );
   }
@@ -74,26 +73,12 @@ class _GamePlayPageState extends State<GamePlayPage> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           if (widget.listFlashcard.isNotEmpty) ...{
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    navigatorPushAndRemoveUntil(context, const HomePage());
-                  },
-                  child: Image.asset(
-                    'assets/photos/buttomhome.png',
-                    width: 60,
-                  ),
-                ),
-                buildRandom()
-              ],
-            ),
-            const SizedBox(height: 24),
+            SizedBox(),
+            buildAppBar(),
             Swipe(
               child: StreamBuilder<Offset>(
                 stream: offsetStream.setOffsetStream,
@@ -120,15 +105,14 @@ class _GamePlayPageState extends State<GamePlayPage> {
                                   children: [
                                     Container(
                                       color: Colors.white,
-                                      padding: const EdgeInsets.all(8),
+                                      padding: const EdgeInsets.all(30),
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.45,
+                                      width: MediaQuery.of(context).size.width,
                                       child: Image.asset(
                                         flashcard.image!,
                                         fit: BoxFit.fill,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.45,
-                                        width:
-                                            MediaQuery.of(context).size.width,
                                       ),
                                     ),
                                     StreamBuilder(
@@ -167,13 +151,41 @@ class _GamePlayPageState extends State<GamePlayPage> {
               },
             ),
             // ignore: equal_elements_in_set
-            const SizedBox(height: 24),
             buildController(),
+            SizedBox(),
           } else ...{
             const WrongPage()
           },
         ],
       ),
+    );
+  }
+
+  Widget buildAppBar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            navigatorPushAndRemoveUntil(context, const HomePage());
+          },
+          child: Image.asset(
+            '${baseImage}home.png',
+            width: 50,
+          ),
+        ),
+        GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            random();
+          },
+          child: Image.asset(
+            '${baseImage}random.png',
+            width: 70,
+          ),
+        )
+      ],
     );
   }
 
@@ -188,7 +200,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
             playAudio();
           },
           child: Image.asset(
-            'assets/photos/next2.png',
+            '${baseImage}next2.png',
             width: 60,
           ),
         ),
@@ -197,7 +209,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
           behavior: HitTestBehavior.translucent,
           onTap: () => playAudio(),
           child: Image.asset(
-            'assets/photos/loa2.png',
+            '${baseImage}loa2.png',
             width: 120,
           ),
         ),
@@ -209,7 +221,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
             playAudio();
           },
           child: Image.asset(
-            'assets/photos/next.png',
+            '${baseImage}next.png',
             width: 60,
           ),
         ),
@@ -227,7 +239,6 @@ class _GamePlayPageState extends State<GamePlayPage> {
               size: 40,
             ),
             onTap: () {
-              music.btnSound();
               onRemove(flashcard);
             },
           )
@@ -239,23 +250,9 @@ class _GamePlayPageState extends State<GamePlayPage> {
               size: 40,
             ),
             onTap: () {
-              music.btnSound();
               onAdd(flashcard);
             },
           );
-  }
-
-  Widget buildRandom() {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () {
-        random();
-      },
-      child: Image.asset(
-        'assets/photos/random.png',
-        width: 80,
-      ),
-    );
   }
 
   void onRemove(Flashcard flashcard) {
@@ -284,6 +281,9 @@ class _GamePlayPageState extends State<GamePlayPage> {
 
   void random() async {
     int intValue = Random().nextInt(widget.listFlashcard.length);
+    if (intValue == slideBloc.activeIndex) {
+      intValue = Random().nextInt(widget.listFlashcard.length);
+    }
     if (slideBloc.activeIndex > intValue) {
       slideBloc.getIndex(intValue);
       player?.setAsset(widget.listFlashcard[slideBloc.activeIndex].audio!);
@@ -295,10 +295,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
       offsetStream.offsetNext();
       await player!.play();
     } else {
-      slideBloc.getIndex(intValue);
-      player?.setAsset(widget.listFlashcard[slideBloc.activeIndex].audio!);
-      offsetStream.offsetNext();
-      await player!.play();
+      int intValue = Random().nextInt(widget.listFlashcard.length);
     }
   }
 
@@ -318,6 +315,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
 
   void playAudio() async {
     player?.setAsset(widget.listFlashcard[slideBloc.activeIndex].audio!);
+    // player?.setAsset('audio/alphabet/a.mp3');
     await player!.play();
   }
 }

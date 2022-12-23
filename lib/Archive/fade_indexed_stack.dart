@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:vehicle_tracking/common/const/color.dart';
+// import 'package:vehicle_tracking/common/const/background.dart';
 
 class FadeIndexedStack extends StatefulWidget {
   final int index;

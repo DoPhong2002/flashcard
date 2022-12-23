@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../const/color.dart';
+import '../../const/const.dart';
 
 class CategoryType extends StatelessWidget {
   final VoidCallback onTap;

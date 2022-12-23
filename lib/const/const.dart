@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 const baseColorImage = 'assets/color/';
 const baseAnimalImage = 'assets/animal/';
 const baseFamilyImage = 'assets/family/';
@@ -11,3 +13,5 @@ const baseAlphabetAudio = 'audio/alphabet/';
 const baseItemAudio = 'audio/item/';
 ///
 const baseImage = 'assets/photos/';
+///
+const Color primaryColor = Color(0xFFF7924A);

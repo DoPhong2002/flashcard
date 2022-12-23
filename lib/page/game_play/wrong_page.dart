@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../comon/navigator.dart';
+import '../../const/const.dart';
 import '../home/home_page.dart';
 
 class WrongPage extends StatelessWidget {
@@ -49,14 +50,15 @@ class WrongPage extends StatelessWidget {
                       .copyWith(color: Colors.black),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  navigatorPushAndRemoveUntil(
-                    context,
-                    const HomePage(),
-                  );
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  navigatorPushAndRemoveUntil(context, const HomePage());
                 },
-                icon: const Icon(Icons.near_me),
+                child: Image.asset(
+                  '${baseImage}home.png',
+                  width: 40,
+                ),
               ),
             ],
           ),
@@ -68,7 +70,7 @@ class WrongPage extends StatelessWidget {
               alignment: Alignment.topRight,
               width: 200,
               child: Image.asset(
-                'assets/photos/wrong.png',
+                '${baseImage}wrong.png',
               ),
             ),
           ],

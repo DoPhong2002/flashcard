@@ -41,17 +41,10 @@ dependencies:
   flutter_secure_storage: ^6.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  firebase_messaging: ^14.0.1
-  cached_network_image: ^3.2.2
-  liquid_swipe: ^3.0.0
-  smooth_page_indicator: ^1.0.0+2
-  carousel_slider: ^4.1.1
   just_audio: ^0.9.30
-  curved_navigation_bar: ^1.0.3
   flutter_advanced_switch: ^3.0.1
   swipe: ^0.0.1
   google_fonts: ^3.0.1
-  awesome_dialog: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +79,7 @@ flutter:
     - audio/item/
     - audio/family/
     - audio/animal/
+    - audio/music/
 
 
   # To add assets to your application, add an assets section, like this:

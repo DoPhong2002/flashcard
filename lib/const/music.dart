@@ -7,40 +7,22 @@ class Music {
 
   Music._internal();
 
-  AudioPlayer? player;
-
   bool isPlayMusic = true;
-  bool isPlaySound = true;
 
-  String urlMusic = "audio/nhac.mp3";
-  String urlSound = "audio/soundd.mp3";
-
+  String urlMusic = "audio/music/music.mp3";
+  AudioPlayer player = AudioPlayer();
   void backgroundMusic() {
     isPlayMusic ? playMusic() : stopMusic();
   }
 
-  void btnSound() {
-    isPlaySound ? playSound() : stopMusic();
-  }
-
-  void playMusic() {
-    player = AudioPlayer();
-    player?.setAsset(urlMusic);
-    if (!music.player!.playing) {
-      player?.play();
-      player?.setLoopMode(LoopMode.one);
-    }
-  }
-
-  void playSound() {
-    player = AudioPlayer();
-    player?.setAsset(urlSound);
-    player?.play();
+  void playMusic() async {
+    player.setAsset(urlMusic);
+    player.play();
+    player.setLoopMode(LoopMode.one);
   }
 
   void stopMusic() async {
-    // player?.setAsset(urlMusic);
-    player?.stop();
+    player.stop();
   }
 }
 

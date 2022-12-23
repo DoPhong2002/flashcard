@@ -1,11 +1,12 @@
 import 'package:flashcards/comon/data_local/hive_manager.dart';
+import 'package:flashcards/const/const.dart';
 import 'package:flashcards/const/music.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../comon/navigator.dart';
-import '../../const/color.dart';
+import '../../const/background.dart';
 import '../home/home_page.dart';
 
 class SettingPage extends StatefulWidget {
@@ -19,38 +20,21 @@ class _SettingPageState extends State<SettingPage> {
   var notifier1 = ValueNotifier<bool>(true);
   var notifier2 = ValueNotifier<bool>(true);
   var notifier3 = ValueNotifier<bool>(true);
-  bool checked = false;
 
   @override
   void initState() {
-    // if (music.player!.playing) {
-    //   notifier1.value = true;
-    // } else {
-    //   notifier1.value = false;
-    // }
+    hive.getValue(music.isPlayMusic.toString());
     notifier1.value = music.isPlayMusic;
     notifier1.addListener(() {
       setState(() {
         if (notifier1.value) {
           music.isPlayMusic = true;
-          hive.setValue(music.isPlayMusic, true);
-          music.backgroundMusic();
+          hive.setValue(userKey, true);
+          music.playMusic();
         } else {
           music.isPlayMusic = false;
-          hive.setValue(music.isPlayMusic, false);
-          print('check: ${music.isPlayMusic}');
-          music.backgroundMusic();
-        }
-      });
-    });
-    notifier2.addListener(() {
-      setState(() {
-        if (notifier2.value) {
-          music.isPlaySound = true;
-          music.btnSound();
-        } else {
-          music.isPlaySound = false;
-          music.btnSound();
+          hive.setValue(userKey, false);
+          music.stopMusic();
         }
       });
     });
@@ -63,11 +47,7 @@ class _SettingPageState extends State<SettingPage> {
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
-        children: [
-          const BuildBackGround(),
-          buildSetting()
-          // Container(height: 50,width: 50,color: Colors.red,)
-        ],
+        children: [const BuildBackGround(), buildSetting()],
       ),
     );
   }
@@ -77,7 +57,7 @@ class _SettingPageState extends State<SettingPage> {
       alignment: Alignment.bottomCenter,
       children: [
         Image.asset(
-          'assets/photos/setting1.png',
+          '${baseImage}setting1.png',
           fit: BoxFit.fill,
           height: MediaQuery.of(context).size.height * 0.35,
           width: MediaQuery.of(context).size.width,
@@ -93,7 +73,7 @@ class _SettingPageState extends State<SettingPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Music',
+                      'Music:',
                       style: GoogleFonts.gloriaHallelujah(
                         textStyle: const TextStyle(
                             fontSize: 24,
@@ -149,7 +129,7 @@ class _SettingPageState extends State<SettingPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Music',
+                      'Language:',
                       style: GoogleFonts.gloriaHallelujah(
                         textStyle: const TextStyle(
                             fontSize: 24,
@@ -165,7 +145,7 @@ class _SettingPageState extends State<SettingPage> {
                       borderRadius: const BorderRadius.all(Radius.circular(50)),
                       inactiveColor: primaryColor,
                       inactiveChild: Text(
-                        'OFF',
+                        'VN',
                         style: GoogleFonts.gloriaHallelujah(
                           textStyle: const TextStyle(
                               fontSize: 24,
@@ -174,7 +154,7 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ),
                       activeChild: Text(
-                        'ON',
+                        'EN',
                         style: GoogleFonts.gloriaHallelujah(
                           textStyle: const TextStyle(
                               fontSize: 24,
@@ -205,7 +185,7 @@ class _SettingPageState extends State<SettingPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Music',
+                      'Sound:',
                       style: GoogleFonts.gloriaHallelujah(
                         textStyle: const TextStyle(
                             fontSize: 24,
@@ -258,20 +238,20 @@ class _SettingPageState extends State<SettingPage> {
         ),
         Positioned(
           bottom: 30,
-          child: buildBottomHome(),
+          child: btnBack(),
         )
       ],
     );
   }
 
-  Widget buildBottomHome() {
+  Widget btnBack() {
     return InkWell(
       onTap: () {
         navigatorPushAndRemoveUntil(context, const HomePage());
       },
       child: Image.asset(
-        'assets/photos/ok.png',
-        width: 80,
+        'assets/photos/home.png',
+        width: 40,
       ),
     );
   }
