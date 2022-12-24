@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                         listFlashcard: selectedBloc.listFlashcardSelected));
               },
               image: '${baseImage}nao.png',
-              title: 'Your Saved'),
+              title: 'Saved'),
           CategoryType(
               onTap: () {
                 navigatorPushAndRemoveUntil(context, const DesignPage());

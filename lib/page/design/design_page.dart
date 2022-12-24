@@ -19,14 +19,12 @@ class _DesignPageState extends State<DesignPage> {
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
-        children: [
-          const BuildBackGround(),
-          buildBody()
-        ],
+        children: [const BuildBackGround(), buildBody()],
       ),
     );
   }
-  Widget buildBody(){
+
+  Widget buildBody() {
     return Stack(
       children: [
         Image.asset('${baseImage}fix.png'),
@@ -81,7 +79,6 @@ class _DesignPageState extends State<DesignPage> {
             ),
           ),
         ),
-
       ],
     );
   }

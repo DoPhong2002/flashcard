@@ -73,11 +73,10 @@ class _GamePlayPageState extends State<GamePlayPage> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           if (widget.listFlashcard.isNotEmpty) ...{
-            SizedBox(),
+            const SizedBox(),
             buildAppBar(),
             Swipe(
               child: StreamBuilder<Offset>(
@@ -150,9 +149,8 @@ class _GamePlayPageState extends State<GamePlayPage> {
                 previous();
               },
             ),
-            // ignore: equal_elements_in_set
             buildController(),
-            SizedBox(),
+            const SizedBox(height: 0),
           } else ...{
             const WrongPage()
           },
@@ -283,19 +281,16 @@ class _GamePlayPageState extends State<GamePlayPage> {
     int intValue = Random().nextInt(widget.listFlashcard.length);
     if (intValue == slideBloc.activeIndex) {
       intValue = Random().nextInt(widget.listFlashcard.length);
-    }
-    if (slideBloc.activeIndex > intValue) {
+    } else if (slideBloc.activeIndex > intValue) {
       slideBloc.getIndex(intValue);
       player?.setAsset(widget.listFlashcard[slideBloc.activeIndex].audio!);
       offsetStream.offsetPrevious();
       await player!.play();
-    } else if (slideBloc.activeIndex < intValue) {
+    } else {
       slideBloc.getIndex(intValue);
       player?.setAsset(widget.listFlashcard[slideBloc.activeIndex].audio!);
       offsetStream.offsetNext();
       await player!.play();
-    } else {
-      int intValue = Random().nextInt(widget.listFlashcard.length);
     }
   }
 
@@ -315,7 +310,6 @@ class _GamePlayPageState extends State<GamePlayPage> {
 
   void playAudio() async {
     player?.setAsset(widget.listFlashcard[slideBloc.activeIndex].audio!);
-    // player?.setAsset('audio/alphabet/a.mp3');
     await player!.play();
   }
 }
