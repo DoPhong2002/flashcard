@@ -45,6 +45,7 @@ dependencies:
   flutter_advanced_switch: ^3.0.1
   swipe: ^0.0.1
   google_fonts: ^3.0.1
+  flutter_cache_manager: ^3.3.0
 
 dev_dependencies:
   flutter_test:

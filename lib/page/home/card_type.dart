@@ -2,7 +2,7 @@ import 'package:flashcards/comon/navigator.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/const.dart';
-import '../../model/flashcards_model.dart';
+import '../../service/category.dart';
 import '../game_play/game_play_page.dart';
 
 class TypeCard extends StatelessWidget {
@@ -48,7 +48,7 @@ class TypeCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 image: DecorationImage(
-                    image: AssetImage(image), fit: BoxFit.cover),
+                    image: NetworkImage(image), fit: BoxFit.cover),
               ),
             ),
             Expanded(
@@ -84,6 +84,7 @@ class TypeCard extends StatelessWidget {
 
 class Header extends StatelessWidget {
   final String header;
+
   const Header({Key? key, required this.header}) : super(key: key);
 
   @override
@@ -99,5 +100,4 @@ class Header extends StatelessWidget {
       ),
     );
   }
-
 }

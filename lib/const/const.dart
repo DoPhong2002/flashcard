@@ -15,3 +15,6 @@ const baseItemAudio = 'audio/item/';
 const baseImage = 'assets/photos/';
 ///
 const Color primaryColor = Color(0xFFF7924A);
+///
+// const baseUrl = 'https://63de3e43f1af41051b0fb57d.mockapi.io/';
+const baseUrl = 'https://63df5be559bccf35dab225ed.mockapi.io/';

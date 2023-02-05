@@ -1,9 +1,11 @@
 import 'package:flashcards/comon/data_local/hive_manager.dart';
 import 'package:flashcards/const/music.dart';
-import 'package:flashcards/model/flashcards_model.dart';
 import 'package:flashcards/page/home/home_page.dart';
+import 'package:flashcards/service/service/api_service.dart';
+import 'package:flashcards/service/service/flashcard_service.dart';
 import 'package:flutter/material.dart';
 
+import '../../bloc/flashcard_bloc.dart';
 import '../../bloc/flashcard_stream.dart';
 import '../../const/const.dart';
 
@@ -24,11 +26,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    categoryBloc.getCategory();
     Future.delayed(const Duration(seconds: 2), () {
-      initData();
+    initData();
     });
     startAnimation();
-    model.createListFlashcard();
     super.initState();
   }
 
@@ -38,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
       _runFirstTime = false;
       myInitState();
     }
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -62,8 +65,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Image.asset(
                   '${baseImage}background.jpg',
                   fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height,
                 ),
               ),
             ),
@@ -83,7 +92,10 @@ class _SplashScreenState extends State<SplashScreen> {
               },
               blendMode: BlendMode.dstOut,
               child: Container(
-                height: MediaQuery.of(context).size.height * 1.0,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height * 1.0,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -115,7 +127,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 opacity: animate ? 1 : 0,
                 child: Image.asset(
                   '${baseImage}logo_flashcard.png',
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                 ),
               ),
             ),
@@ -182,6 +197,5 @@ class _SplashScreenState extends State<SplashScreen> {
     await hive.init();
     music.isPlayMusic = await hive.getValue(userKey);
     music.backgroundMusic();
-
   }
 }

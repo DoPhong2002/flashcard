@@ -1,3 +1,4 @@
+import 'package:flashcards/bloc/flashcard_bloc.dart';
 import 'package:flashcards/comon/navigator.dart';
 import 'package:flashcards/const/background.dart';
 import 'package:flashcards/page/design/design_page.dart';
@@ -7,11 +8,9 @@ import 'package:flashcards/page/home/category_type.dart';
 import 'package:flashcards/page/setting/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../bloc/flashcard_stream.dart';
 import '../../const/const.dart';
 import '../../const/music.dart';
-import '../../model/flashcards_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,7 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(bottom: 0),
@@ -220,32 +219,32 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         TypeCard(
-          listFlashcard: model.listFlashcardAlphabet,
-          image: 'assets/alphabet/logo.jpg',
+          listFlashcard: categoryBloc.flashcards[0].flashcard!,
+          image: categoryBloc.flashcards[0].urlPicture!,
           title: 'Alphabet',
         ),
         const SizedBox(height: 16),
         TypeCard(
-          listFlashcard: model.listFlashcardColor,
-          image: 'assets/color/logo.jpg',
+          listFlashcard: categoryBloc.flashcards[1].flashcard!,
+          image: categoryBloc.flashcards[1].urlPicture!,
           title: 'Color',
         ),
         const SizedBox(height: 16),
         TypeCard(
-          listFlashcard: model.listFlashcardFamily,
-          image: 'assets/family/logo.jpg',
+          listFlashcard: categoryBloc.flashcards[2].flashcard!,
+          image: categoryBloc.flashcards[2].urlPicture!,
           title: 'Family',
         ),
         const SizedBox(height: 16),
         TypeCard(
-          listFlashcard: model.listFlashcardAnimal,
-          image: 'assets/animal/logo.jpg',
+          listFlashcard: categoryBloc.flashcards[3].flashcard!,
+          image: categoryBloc.flashcards[3].urlPicture!,
           title: 'Animal',
         ),
         const SizedBox(height: 16),
         TypeCard(
-          listFlashcard: model.listFlashcardItem,
-          image: 'assets/item/logo.jpg',
+          listFlashcard: categoryBloc.flashcards[4].flashcard!,
+          image: categoryBloc.flashcards[4].urlPicture!,
           title: 'Item',
         ),
         const SizedBox(height: 90),

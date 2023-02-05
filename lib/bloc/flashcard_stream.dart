@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
+ import 'package:flashcards/service/category.dart';
+import 'package:flashcards/service/service/api_service.dart';
+import 'package:flashcards/service/service/flashcard_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../model/flashcards_model.dart';
 
 class SelectedStream {
   static final _stream = SelectedStream._internal();
@@ -39,7 +40,7 @@ class SelectedStream {
       Map<String, dynamic> dataJson = Map<String, dynamic>();
       dataJson['name'] = flashcard.name;
       dataJson['audio'] = flashcard.audio;
-      dataJson['image'] = flashcard.image;
+      dataJson['image'] = flashcard.urlPicture;
       dataJson['isClick'] = flashcard.isClick;
 
       // b2: chuyển Map thành String
@@ -62,7 +63,7 @@ class SelectedStream {
         // b2 chuyen map ve model
         Flashcard flashcard = Flashcard();
         flashcard.name = dataMap['name'];
-        flashcard.image = dataMap['image'];
+        flashcard.urlPicture = dataMap['image'];
         flashcard.audio = dataMap['audio'];
         flashcard.isClick = dataMap['isClick'];
         listFlashcardSelected.add(flashcard);

@@ -1,0 +1,106 @@
+[33mcommit ada7e1a920cff98b8ee15917a6dbf93bb77428ac[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: unknown <phongproadg@gmail.com>
+Date:   Sun Feb 5 22:32:47 2023 +0700
+
+    update
+
+ delete mode 100644 assets/alphabet/a.png
+ delete mode 100644 assets/alphabet/b.png
+ delete mode 100644 assets/alphabet/c.png
+ delete mode 100644 assets/alphabet/d.png
+ delete mode 100644 assets/alphabet/e.png
+ delete mode 100644 assets/alphabet/f.png
+ delete mode 100644 assets/alphabet/g.png
+ delete mode 100644 assets/alphabet/logo.jpg
+ delete mode 100644 assets/animal/bee.png
+ delete mode 100644 assets/animal/buffalo.png
+ delete mode 100644 assets/animal/butterfly.png
+ delete mode 100644 assets/animal/chicken.png
+ delete mode 100644 assets/animal/cow.png
+ delete mode 100644 assets/animal/duck.png
+ delete mode 100644 assets/animal/logo.jpg
+ delete mode 100644 assets/animal/pig.png
+ delete mode 100644 assets/animal/tiger.png
+ delete mode 100644 assets/color/black.png
+ delete mode 100644 assets/color/blue.png
+ delete mode 100644 assets/color/green.png
+ delete mode 100644 assets/color/logo.jpg
+ delete mode 100644 assets/color/orange.png
+ delete mode 100644 assets/color/pink.png
+ delete mode 100644 assets/color/red.png
+ delete mode 100644 assets/color/violet.png
+ delete mode 100644 assets/color/yellow.png
+ delete mode 100644 assets/family/aunt.png
+ delete mode 100644 assets/family/father.png
+ delete mode 100644 assets/family/grandparent.png
+ delete mode 100644 assets/family/logo.jpg
+ delete mode 100644 assets/family/mother.png
+ delete mode 100644 assets/family/sister.png
+ delete mode 100644 assets/family/uncle.png
+ delete mode 100644 assets/item/chair.png
+ delete mode 100644 assets/item/cupboard.png
+ delete mode 100644 assets/item/house.png
+ delete mode 100644 assets/item/logo.jpg
+ delete mode 100644 assets/item/pan.png
+ delete mode 100644 assets/item/pot.png
+ delete mode 100644 assets/item/spoon.png
+ delete mode 100644 assets/item/table.png
+ delete mode 100644 assets/item/water_tap.png
+ delete mode 100644 audio/alphabet/a.mp3
+ delete mode 100644 audio/alphabet/b.mp3
+ delete mode 100644 audio/alphabet/c.mp3
+ delete mode 100644 audio/alphabet/d.mp3
+ delete mode 100644 audio/alphabet/e.mp3
+ delete mode 100644 audio/alphabet/f.mp3
+ delete mode 100644 audio/alphabet/g.mp3
+ delete mode 100644 audio/animal/bee.mp3
+ delete mode 100644 audio/animal/buffalo.mp3
+ delete mode 100644 audio/animal/butterfly.mp3
+ delete mode 100644 audio/animal/chicken.mp3
+ delete mode 100644 audio/animal/cow.mp3
+ delete mode 100644 audio/animal/duck.mp3
+ delete mode 100644 audio/animal/pig.mp3
+ delete mode 100644 audio/animal/tiger.mp3
+ delete mode 100644 audio/colors/black.mp3
+ delete mode 100644 audio/colors/blue.mp3
+ delete mode 100644 audio/colors/green.mp3
+ delete mode 100644 audio/colors/orange.mp3
+ delete mode 100644 audio/colors/pink.mp3
+ delete mode 100644 audio/colors/red.mp3
+ delete mode 100644 audio/colors/violet.mp3
+ delete mode 100644 audio/colors/white.mp3
+ delete mode 100644 audio/colors/yellow.mp3
+ delete mode 100644 audio/family/aunt.mp3
+ delete mode 100644 audio/family/father.mp3
+ delete mode 100644 audio/family/grandparent.mp3
+ delete mode 100644 audio/family/mother.mp3
+ delete mode 100644 audio/family/sister.mp3
+ delete mode 100644 audio/family/uncle.mp3
+ delete mode 100644 audio/item/chair.mp3
+ delete mode 100644 audio/item/cupboard.mp3
+ delete mode 100644 audio/item/house.mp3
+ delete mode 100644 audio/item/pan.mp3
+ delete mode 100644 audio/item/pot.mp3
+ delete mode 100644 audio/item/spoon.mp3
+ delete mode 100644 audio/item/table.mp3
+ delete mode 100644 audio/item/water_tap.mp3
+
+[33mcommit a7b0f4bef7ddc37639b78f7469b569acde6d18ca[m
+Author: unknown <phongproadg@gmail.com>
+Date:   Sun Feb 5 22:29:16 2023 +0700
+
+    update
+
+ delete mode 100644 lib/const/category/category.dart
+
+[33mcommit 24912fea21fe29e9f5a9e250ceefdad2086d1ead[m
+Author: unknown <phongproadg@gmail.com>
+Date:   Fri Dec 23 18:22:39 2022 +0700
+
+    update
+
+ delete mode 100644 assets/photos/logo_flashcards.png
+ delete mode 100644 audio/nhac.mp3
+ delete mode 100644 audio/soundd.mp3
+ delete mode 100644 lib/page/game_play/model.dart
+ delete mode 100644 lib/tesst.dart

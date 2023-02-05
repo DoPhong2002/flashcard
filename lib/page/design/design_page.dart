@@ -1,5 +1,5 @@
-import 'package:flashcards/const/const.dart';
-import 'package:flutter/material.dart';
+ import 'package:flashcards/const/const.dart';
+ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../comon/navigator.dart';
@@ -14,17 +14,17 @@ class DesignPage extends StatefulWidget {
 }
 
 class _DesignPageState extends State<DesignPage> {
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
-        children: [const BuildBackGround(), buildBody()],
+        children: [const BuildBackGround(), buildBody()
+        ],
       ),
     );
   }
-
-  Widget buildBody() {
+   Widget buildBody() {
     return Stack(
       children: [
         Image.asset('${baseImage}fix.png'),

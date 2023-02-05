@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flashcards/Archive/slide/animation_widget.dart';
 import 'package:flashcards/comon/navigator.dart';
 import 'package:flashcards/const/music.dart';
-import 'package:flashcards/page/game_play/wrong_page.dart';
+   import 'package:flashcards/page/game_play/wrong_page.dart';
 import 'package:flashcards/page/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +13,7 @@ import '../../bloc/flashcard_stream.dart';
 import '../../bloc/slide_stream.dart';
 import '../../bloc/offset_stream.dart';
 import '../../const/const.dart';
-import '../../model/flashcards_model.dart';
+ import '../../service/category.dart';
 
 class GamePlayPage extends StatefulWidget {
   final List<Flashcard> listFlashcard;
@@ -69,6 +69,34 @@ class _GamePlayPageState extends State<GamePlayPage> {
     );
   }
 
+  Widget buildAppBar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            navigatorPushAndRemoveUntil(context, const HomePage());
+          },
+          child: Image.asset(
+            '${baseImage}home.png',
+            width: 50,
+          ),
+        ),
+        GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            random();
+          },
+          child: Image.asset(
+            '${baseImage}random.png',
+            width: 70,
+          ),
+        )
+      ],
+    );
+  }
+
   Widget buildGamePlay() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -109,8 +137,8 @@ class _GamePlayPageState extends State<GamePlayPage> {
                                           MediaQuery.of(context).size.height *
                                               0.45,
                                       width: MediaQuery.of(context).size.width,
-                                      child: Image.asset(
-                                        flashcard.image!,
+                                      child: Image.network(
+                                        flashcard.urlPicture!,
                                         fit: BoxFit.fill,
                                       ),
                                     ),
@@ -159,34 +187,6 @@ class _GamePlayPageState extends State<GamePlayPage> {
     );
   }
 
-  Widget buildAppBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            navigatorPushAndRemoveUntil(context, const HomePage());
-          },
-          child: Image.asset(
-            '${baseImage}home.png',
-            width: 50,
-          ),
-        ),
-        GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            random();
-          },
-          child: Image.asset(
-            '${baseImage}random.png',
-            width: 70,
-          ),
-        )
-      ],
-    );
-  }
-
   Widget buildController() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -228,7 +228,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
   }
 
   Widget buildHeart(Flashcard flashcard) {
-    return flashcard.isClick
+    return flashcard.isClick!
         ? GestureDetector(
             behavior: HitTestBehavior.translucent,
             child: const Icon(
@@ -283,12 +283,12 @@ class _GamePlayPageState extends State<GamePlayPage> {
       intValue = Random().nextInt(widget.listFlashcard.length);
     } else if (slideBloc.activeIndex > intValue) {
       slideBloc.getIndex(intValue);
-      player?.setAsset(widget.listFlashcard[slideBloc.activeIndex].audio!);
+      player?.setUrl(widget.listFlashcard[slideBloc.activeIndex].audio!);
       offsetStream.offsetPrevious();
       await player!.play();
     } else {
       slideBloc.getIndex(intValue);
-      player?.setAsset(widget.listFlashcard[slideBloc.activeIndex].audio!);
+      player?.setUrl(widget.listFlashcard[slideBloc.activeIndex].audio!);
       offsetStream.offsetNext();
       await player!.play();
     }
@@ -309,7 +309,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
   }
 
   void playAudio() async {
-    player?.setAsset(widget.listFlashcard[slideBloc.activeIndex].audio!);
+    player?.setUrl(widget.listFlashcard[slideBloc.activeIndex].audio!);
     await player!.play();
   }
 }
