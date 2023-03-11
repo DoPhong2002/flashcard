@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class HiveManager {
@@ -10,7 +9,7 @@ class HiveManager {
 
   HiveManager._internal();
 
-  var _currentBox = 'config';
+  final _currentBox = 'config';
 
   Future init() async {
     await Hive.initFlutter();

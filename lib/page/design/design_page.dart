@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../comon/navigator.dart';
 import '../../const/background.dart';
+import '../../generated/l10n.dart';
 import '../home/home_page.dart';
 
 class DesignPage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _DesignPageState extends State<DesignPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Coming soon..!',
+                  S.of(context).comming,
                   style: GoogleFonts.gloriaHallelujah(
                     textStyle: Theme.of(context)
                         .textTheme

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../comon/navigator.dart';
 import '../../const/const.dart';
+import '../../generated/l10n.dart';
 import '../home/home_page.dart';
 
 class WrongPage extends StatelessWidget {
@@ -42,7 +43,7 @@ class WrongPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'No cards have been saved yet, save more....!',
+                S.of(context).savecard,
                 style: GoogleFonts.gloriaHallelujah(
                   textStyle: Theme.of(context)
                       .textTheme

@@ -13,7 +13,7 @@ class BuildBackGround extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             Colors.yellowAccent.withOpacity(0.9),
-            Colors.orange.withOpacity(0.9),
+            Colors.white.withOpacity(0.9),
             Colors.brown.shade300.withOpacity(0.9),
           ],
         ),

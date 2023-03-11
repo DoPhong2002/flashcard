@@ -19,9 +19,9 @@ class _SlidePageState extends State<SlidePage> {
   var currentIndex = 0;
   var offset = const Offset(0.5, 0);
   var ok = false;
+
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -80,10 +80,9 @@ class _SlidePageState extends State<SlidePage> {
 
   void next() {
     if (currentIndex < photos.length - 1) {
-      print('_SlidePageState.next');
-      setState(() {        offset = const Offset(1, 0);
-
-      currentIndex += 1;
+      setState(() {
+        offset = const Offset(1, 0);
+        currentIndex += 1;
       });
     }
   }

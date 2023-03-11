@@ -1,4 +1,4 @@
-import 'package:flashcards/service/category.dart';
+import 'package:flashcards/model/category.dart';
 
 import 'api_service.dart';
 

@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../bloc/flashcard_stream.dart';
 import '../../const/const.dart';
 import '../../const/music.dart';
+import '../../generated/l10n.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -59,15 +60,15 @@ class _HomePageState extends State<HomePage> {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Hi Baby',
+            Text(
+            S.of(context).hibaby,
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
           ),
           Row(
             children: [
-              const Text(
-                'Welcome You!  ',
+                Text(
+                S.of(context).welcome,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.normal,
@@ -89,10 +90,10 @@ class _HomePageState extends State<HomePage> {
       delegate: SliverChildListDelegate(
         [
           buildWelcome(),
-          const Header(header: 'Category'),
+            Header(header: S.of(context).category),
           const SizedBox(height: 8),
           buildListCategory(),
-          const Header(header: 'For You'),
+            Header(header: S.of(context).foryou),
           const SizedBox(height: 8),
           buildListPlay()
         ],
@@ -108,7 +109,7 @@ class _HomePageState extends State<HomePage> {
           margin: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: primaryColor,
+            color:primaryColor,
             boxShadow: const [
               BoxShadow(
                 color: Colors.black26,
@@ -147,7 +148,7 @@ class _HomePageState extends State<HomePage> {
             duration: const Duration(milliseconds: 2600),
             opacity: animate ? 1 : 0,
             child: Text(
-              '   Learn,\n    Step to the\n            Future',
+              S.of(context).learn,
               style: GoogleFonts.gloriaHallelujah(
                 textStyle: const TextStyle(
                     fontSize: 20,
@@ -197,19 +198,19 @@ class _HomePageState extends State<HomePage> {
                         listFlashcard: selectedBloc.listFlashcardSelected));
               },
               image: '${baseImage}nao.png',
-              title: 'Saved'),
+              title: S.of(context).saved),
           CategoryType(
               onTap: () {
                 navigatorPushAndRemoveUntil(context, const DesignPage());
               },
               image: '${baseImage}boy.png',
-              title: 'Your Design'),
+              title: S.of(context).yourdesign),
           CategoryType(
               onTap: () {
                 navigatorPushAndRemoveUntil(context, const SettingPage());
               },
               image: '${baseImage}setting.png',
-              title: 'Setting'),
+              title: S.of(context).setting),
         ],
       ),
     );
@@ -221,31 +222,31 @@ class _HomePageState extends State<HomePage> {
         TypeCard(
           listFlashcard: categoryBloc.flashcards[0].flashcard!,
           image: categoryBloc.flashcards[0].urlPicture!,
-          title: 'Alphabet',
+          title: S.of(context).alphabet,
         ),
         const SizedBox(height: 16),
         TypeCard(
           listFlashcard: categoryBloc.flashcards[1].flashcard!,
           image: categoryBloc.flashcards[1].urlPicture!,
-          title: 'Color',
+          title: S.of(context).color,
         ),
         const SizedBox(height: 16),
         TypeCard(
           listFlashcard: categoryBloc.flashcards[2].flashcard!,
           image: categoryBloc.flashcards[2].urlPicture!,
-          title: 'Family',
+          title: S.of(context).animal,
         ),
         const SizedBox(height: 16),
         TypeCard(
           listFlashcard: categoryBloc.flashcards[3].flashcard!,
           image: categoryBloc.flashcards[3].urlPicture!,
-          title: 'Animal',
+          title: S.of(context).family,
         ),
         const SizedBox(height: 16),
         TypeCard(
           listFlashcard: categoryBloc.flashcards[4].flashcard!,
           image: categoryBloc.flashcards[4].urlPicture!,
-          title: 'Item',
+          title: S.of(context).item,
         ),
         const SizedBox(height: 90),
       ],

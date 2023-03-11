@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flashcards/service/category.dart';
+import 'package:flashcards/model/category.dart';
 import 'package:flashcards/service/service/api_service.dart';
 import 'package:flashcards/service/service/flashcard_service.dart';
 

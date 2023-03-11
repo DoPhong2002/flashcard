@@ -1,9 +1,10 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcards/Archive/slide/animation_widget.dart';
 import 'package:flashcards/comon/navigator.dart';
 import 'package:flashcards/const/music.dart';
-   import 'package:flashcards/page/game_play/wrong_page.dart';
+import 'package:flashcards/page/game_play/wrong_page.dart';
 import 'package:flashcards/page/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +14,7 @@ import '../../bloc/flashcard_stream.dart';
 import '../../bloc/slide_stream.dart';
 import '../../bloc/offset_stream.dart';
 import '../../const/const.dart';
- import '../../service/category.dart';
+import '../../model/category.dart';
 
 class GamePlayPage extends StatefulWidget {
   final List<Flashcard> listFlashcard;
@@ -137,9 +138,10 @@ class _GamePlayPageState extends State<GamePlayPage> {
                                           MediaQuery.of(context).size.height *
                                               0.45,
                                       width: MediaQuery.of(context).size.width,
-                                      child: Image.network(
-                                        flashcard.urlPicture!,
-                                        fit: BoxFit.fill,
+                                      child: CachedNetworkImage(
+                                        imageUrl: flashcard.urlPicture!,
+                                        errorWidget: (context, url, error) =>
+                                            Icon(Icons.error),
                                       ),
                                     ),
                                     StreamBuilder(
@@ -172,9 +174,11 @@ class _GamePlayPageState extends State<GamePlayPage> {
               ),
               onSwipeLeft: () {
                 next();
+                playAudio();
               },
               onSwipeRight: () {
                 previous();
+                playAudio();
               },
             ),
             buildController(),
@@ -309,7 +313,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
   }
 
   void playAudio() async {
-    player?.setUrl(widget.listFlashcard[slideBloc.activeIndex].audio!);
+    await player?.setUrl(widget.listFlashcard[slideBloc.activeIndex].audio!);
     await player!.play();
   }
 }

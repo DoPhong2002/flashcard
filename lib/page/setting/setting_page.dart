@@ -4,9 +4,13 @@ import 'package:flashcards/const/music.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:provider/provider.dart';
+import '../../bloc/app_state/app_state.dart';
+import '../../comon/select_item_dialog.dart';
 import '../../comon/navigator.dart';
-import '../../const/background.dart';
+ import '../../const/background.dart';
+import '../../generated/l10n.dart';
+import '../../model/item_select.dart';
 import '../home/home_page.dart';
 
 class SettingPage extends StatefulWidget {
@@ -23,6 +27,7 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   void initState() {
+
     hive.getValue(music.isPlayMusic.toString());
     notifier1.value = music.isPlayMusic;
     notifier1.addListener(() {
@@ -73,7 +78,7 @@ class _SettingPageState extends State<SettingPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Music:',
+                      S.of(context).music,
                       style: GoogleFonts.gloriaHallelujah(
                         textStyle: const TextStyle(
                             fontSize: 24,
@@ -122,6 +127,7 @@ class _SettingPageState extends State<SettingPage> {
                 ),
               ),
               const SizedBox(height: 8),
+
               Container(
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(horizontal: 60),
@@ -129,63 +135,7 @@ class _SettingPageState extends State<SettingPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Language:',
-                      style: GoogleFonts.gloriaHallelujah(
-                        textStyle: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                      ),
-                    ),
-                    AdvancedSwitch(
-                      controller: notifier2,
-                      enabled: true,
-                      height: 40,
-                      width: 100,
-                      borderRadius: const BorderRadius.all(Radius.circular(50)),
-                      inactiveColor: primaryColor,
-                      inactiveChild: Text(
-                        'VN',
-                        style: GoogleFonts.gloriaHallelujah(
-                          textStyle: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        ),
-                      ),
-                      activeChild: Text(
-                        'EN',
-                        style: GoogleFonts.gloriaHallelujah(
-                          textStyle: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                      ),
-                      thumb: ValueListenableBuilder<bool>(
-                        valueListenable: notifier2,
-                        builder: (_, value, __) {
-                          return value
-                              ? const Icon(
-                                  Icons.music_note,
-                                  color: Colors.white,
-                                )
-                              : const Icon(Icons.music_off);
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Sound:',
+                      S.of(context).sound,
                       style: GoogleFonts.gloriaHallelujah(
                         textStyle: const TextStyle(
                             fontSize: 24,
@@ -233,13 +183,57 @@ class _SettingPageState extends State<SettingPage> {
                   ],
                 ),
               ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.symmetric(horizontal: 60),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      S.of(context).language,
+                      style: GoogleFonts.gloriaHallelujah(
+                        textStyle: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        final map = {"vi": "Tiếng Việt", "en": "Tiếng Anh"};
+                        final languages = S.delegate.supportedLocales;
+                        final items = <ItemSelect<Locale>>[];
+                        for (final language in languages) {
+                          items.add(ItemSelect(
+                              language, map[language.languageCode].toString()));
+                        }
+                        showSelectItemDialog(
+                          context: context,
+                          items: items,
+                          onConfirm: (value) {
+                            final appState = context.read<AppState>();
+                            appState.changeLanguageCode(value.value.languageCode);
+                          },
+                        );
+                      },
+                      child: Image.asset("${baseImage}language.png", width: 40,),
+                    ),
+
+                  ],
+                ),
+              ),
+
+
             ],
           ),
         ),
+
         Positioned(
           bottom: 30,
           child: btnBack(),
-        )
+        ),
+
+
       ],
     );
   }
@@ -251,7 +245,7 @@ class _SettingPageState extends State<SettingPage> {
       },
       child: Image.asset(
         'assets/photos/home.png',
-        width: 40,
+        width: 50,
       ),
     );
   }

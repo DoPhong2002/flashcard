@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flashcards/const/const.dart';
-import 'package:flashcards/service/category.dart';
+import 'package:flashcards/model/category.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 

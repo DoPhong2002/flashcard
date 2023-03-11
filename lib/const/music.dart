@@ -16,13 +16,13 @@ class Music {
   }
 
   void playMusic() async {
-    player.setAsset(urlMusic);
-    player.play();
-    player.setLoopMode(LoopMode.one);
+    await player.setAsset(urlMusic);
+    await player.play();
+    await player.setLoopMode(LoopMode.one);
   }
 
   void stopMusic() async {
-    player.stop();
+    await player.stop();
   }
 }
 

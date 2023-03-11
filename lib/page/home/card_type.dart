@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcards/comon/navigator.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/const.dart';
-import '../../service/category.dart';
+import '../../generated/l10n.dart';
+import '../../model/category.dart';
 import '../game_play/game_play_page.dart';
 
 class TypeCard extends StatelessWidget {
@@ -45,10 +47,17 @@ class TypeCard extends StatelessWidget {
               margin: const EdgeInsets.only(right: 20),
               height: 60,
               width: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                image: DecorationImage(
-                    image: NetworkImage(image), fit: BoxFit.cover),
+              child: CachedNetworkImage(
+                imageUrl: image,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
             ),
             Expanded(
@@ -64,7 +73,7 @@ class TypeCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Let\'s get started, little one',
+                    S.of(context).let,
                     maxLines: 2,
                     style: Theme.of(context)
                         .textTheme
